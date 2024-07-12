@@ -1,3 +1,5 @@
+package bj_10986
+
 import java.util.*
 
 fun main() = with(System.`in`.bufferedReader()){

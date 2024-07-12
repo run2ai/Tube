@@ -1,3 +1,5 @@
+package bj_11659
+
 import java.io.BufferedWriter
 import java.io.OutputStreamWriter
 import java.util.StringTokenizer
