@@ -21,7 +21,7 @@ fun main() = with(System.`in`.bufferedReader()) {
         var g = 0
         var t = 0
 
-        val checkString = str.substring(i, i + S - 2)
+        val checkString = str.substring(i, i + P)
         for (element in checkString) {
             when (element) {
                 'A' -> a++
