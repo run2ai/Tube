@@ -6,34 +6,41 @@ fun main() = with(System.`in`.bufferedReader()) {
     val input = StringTokenizer(readLine())
     val (S, P) = input.nextToken().toInt() to input.nextToken().toInt()
     val str = readLine()
-    val arrInput = StringTokenizer(readLine())
-    val rule = mapOf<String, Int>(
-        "A" to arrInput.nextToken().toInt(),
-        "C" to arrInput.nextToken().toInt(),
-        "G" to arrInput.nextToken().toInt(),
-        "T" to arrInput.nextToken().toInt()
-    )
+    val rule = StringTokenizer(readLine())
+    val (ruleA, ruleC, ruleG, ruleT) = Array(4) { rule.nextToken().toInt() }
+    var (cntA, cntC, cntG, cntT) = IntArray(4) { 0 }
     var result = 0
+    var ptr = P
 
-    repeat(S - P + 1) { i ->
-        var a = 0
-        var c = 0
-        var g = 0
-        var t = 0
-
-        val checkString = str.substring(i, i + P)
-        for (element in checkString) {
-            when (element) {
-                'A' -> a++
-                'C' -> c++
-                'G' -> g++
-                'T' -> t++
-            }
-        }
-
-        if (a >= rule.getValue("A") && c >= rule.getValue("C") && g >= rule.getValue("G") && t >= rule.getValue("T")) {
-            result++
+    repeat(P) {
+        when (str[it]) {
+            'A' -> cntA++
+            'C' -> cntC++
+            'G' -> cntG++
+            'T' -> cntT++
         }
     }
+
+    if (ruleA <= cntA && ruleC <= cntC && ruleG <= cntG && ruleT <= cntT) result++
+
+    while (S > ptr) {
+        when (str[ptr]) {
+            'A' -> cntA++
+            'C' -> cntC++
+            'G' -> cntG++
+            'T' -> cntT++
+        }
+
+        when (str[ptr - P]) {
+            'A' -> cntA--
+            'C' -> cntC--
+            'G' -> cntG--
+            'T' -> cntT--
+        }
+        ptr++
+
+        if (ruleA <= cntA && ruleC <= cntC && ruleG <= cntG && ruleT <= cntT) result++
+    }
+
     print(result)
 }
