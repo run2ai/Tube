@@ -9,7 +9,15 @@ fun main() = with(System.`in`.bufferedReader()){
         arr[it] = readLine().toInt()
     }
 
-    arr.sort()
+    for(i in 0..<N){
+        for (j in i+1..<N){
+            if(arr[i] > arr[j]){
+                val temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+            }
+        }
+    }
 
     repeat(N) {
     sb.appendLine(arr[it])
